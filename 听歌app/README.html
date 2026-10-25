@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#09142e">
+    <title>听歌 · 使用说明</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+        color: #17233b;
+        background: #f3f6fb;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 40px 20px; }
+      main { width: min(820px, 100%); margin: 0 auto; }
+      header, section { background: #fff; border: 1px solid #e1e8f2; border-radius: 16px; }
+      header { padding: 32px; color: #fff; background: linear-gradient(135deg, #10264e, #1763b5); }
+      header p { margin: 10px 0 0; color: #d7e8ff; line-height: 1.7; }
+      h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+      h2 { margin: 0 0 14px; font-size: 1.25rem; }
+      section { margin-top: 18px; padding: 24px; }
+      p, li { line-height: 1.8; }
+      p:last-child { margin-bottom: 0; }
+      ul { padding-left: 22px; }
+      a { color: #145fbd; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+      .button { display: inline-block; padding: 10px 16px; color: #fff; background: #1763b5; border-radius: 9px; font-weight: 600; text-decoration: none; }
+      .button.secondary { color: #145fbd; background: #eaf2ff; }
+      code, pre { font-family: Consolas, "Cascadia Code", monospace; }
+      code { padding: 2px 5px; background: #eef2f8; border-radius: 4px; }
+      pre { overflow-x: auto; padding: 14px 16px; color: #e9f2ff; background: #142039; border-radius: 9px; }
+      .note { padding: 14px 16px; background: #f0f5ff; border-left: 4px solid #4388dc; border-radius: 6px; }
+      @media (max-width: 560px) {
+        body { padding: 20px 12px; }
+        header, section { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>听歌 · 生活内容管理</h1>
+        <p>本机浏览器中的个人内容管理 App。无需账号、后端或云数据库；收藏、保存路径、偏好设置和内容缓存保存在浏览器 IndexedDB。</p>
+        <nav class="actions" aria-label="快捷入口">
+          <a class="button" href="index.html">打开听歌 App</a>
+          <a class="button secondary" href="tests/test-runner.html">运行浏览器测试</a>
+        </nav>
+      </header>
+
+      <section>
+        <h2>运行</h2>
+        <p>可直接在桌面浏览器打开 <a href="index.html"><code>index.html</code></a>。如果浏览器限制本地文件访问或外部公开接口请求，请在项目目录启动本机静态服务器：</p>
+        <pre><code>python -m http.server 8000</code></pre>
+        <p>然后访问 <a href="http://localhost:8000">http://localhost:8000</a>。项目无需安装前端依赖或构建。</p>
+      </section>
+
+      <section>
+        <h2>测试</h2>
+        <p>在同一浏览器打开 <a href="tests/test-runner.html"><code>tests/test-runner.html</code></a>。页面会显示每项测试的通过/失败结果，覆盖路由、数据存储、来源数据校验、开放授权媒体筛选与搜索、刷新失败缓存、路径管理、历史年份解析、主题样式及备份格式校验。</p>
+      </section>
+
+      <section>
+        <h2>外观主题</h2>
+        <p>在“数据与设置”中可选择深蓝科技、浅色或深色主题。主题应用于首页和其他功能页面，并保存在当前浏览器中；首次使用默认采用深蓝科技主题。</p>
+      </section>
+
+      <section>
+        <h2>公开来源与边界</h2>
+        <ul>
+          <li>今日热门歌曲：QQ 音乐热歌榜为首选来源；请求失败时自动回退到网易云音乐热歌榜。</li>
+          <li>热门视频：抖音公开热搜榜展示话题关键词并可跳转到抖音搜索页；热搜词条不是视频内容。</li>
+          <li>历史流行单曲：按年份读取 Wikipedia 上的 Billboard 年终 Hot 100 页面；只显示页面可访问且表格通过校验的数据。</li>
+          <li>网页内播放：歌曲页和视频页提供 Wikimedia Commons 开放授权媒体搜索，可播放受支持的音频/视频文件，并显示可获得的许可证信息及来源署名链接。</li>
+        </ul>
+        <p class="note">QQ 音乐/网易云榜单条目是榜单信息而非可直接播放的音频流；抖音热搜是关键词而非视频文件。要在网页中播放媒体，请使用歌曲页或视频页中的 Wikimedia Commons 搜索。播放取决于网络、浏览器格式支持及文件可用性。</p>
+        <p>外部网站可能限流、变更接口或不可访问。更新失败时保留最近一次成功缓存并显示状态；没有缓存时明确提示无法获取，不生成模拟榜单。来源字段、封面、年份和排名以公开页面实际内容为准。</p>
+      </section>
+
+      <section>
+        <h2>本机数据与备份</h2>
+        <p>保存路径只保存用户输入的文字，不扫描或读取本机文件。备份采用带版本标识的 JSON 格式；恢复前会提示确认，并整体替换本机数据。</p>
+      </section>
+    </main>
+  </body>
+</html>

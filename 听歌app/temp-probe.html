@@ -1,0 +1,22 @@
+<!doctype html><html><body><script src="file:///C:/Users/Administrator/Desktop/%E5%90%AC%E6%AD%8Capp/src/store.js"></script>
+<script src="file:///C:/Users/Administrator/Desktop/%E5%90%AC%E6%AD%8Capp/src/catalog.js"></script>
+<script src="file:///C:/Users/Administrator/Desktop/%E5%90%8C%E6%AD%8Capp/src/backup.js"></script>
+<script>
+  async function test() {
+    const store = window.MusicStore.create({ name: 'probe-' + Date.now() });
+    const favorite = { id: 'song:test-1', type: 'song', contentId: 'test-1' };
+    await store.put('favorites', favorite);
+    await store.put('paths', { id: 'path:test-1', name: '“Ù¿÷', path: 'D:\\Music' });
+    const saved = await store.get('favorites', favorite.id);
+    document.body.insertAdjacentHTML('beforeend', '<div>saved:' + (saved && saved.contentId) + '</div>');
+    const snapshot = await store.exportAll();
+    document.body.insertAdjacentHTML('beforeend', '<div>export:' + snapshot.paths.length + ':' + snapshot.favorites.length + '</div>');
+    await store.replaceAll({ paths: [{ id: 'path:restored', name: 'ª÷∏¥', path: 'E:\\Audio' }] });
+    const paths = await store.getAll('paths');
+    const favorites = await store.getAll('favorites');
+    document.body.insertAdjacentHTML('beforeend', '<div>after:' + paths.length + ':' + favorites.length + '</div>');
+    await store.clear();
+    store.close();
+  }
+  test().then(()=>document.body.insertAdjacentHTML('beforeend', '<div>done</div>')).catch(err=>document.body.insertAdjacentHTML('beforeend', '<div>err:' + err.message + '</div>'));
+</script></body></html>

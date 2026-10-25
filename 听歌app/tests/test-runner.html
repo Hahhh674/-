@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN" data-test-page>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>听歌 App 测试</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <main class="page-content">
+      <div class="page-heading"><div><p class="eyebrow">AUTOMATED CHECKS</p><h1>浏览器测试</h1></div></div>
+      <nav aria-label="测试导航">
+        <a class="nav-link" href="#/home" data-route="home">首页</a>
+        <a class="nav-link" href="#/songs" data-route="songs">歌曲</a>
+        <a class="nav-link" href="#/videos" data-route="videos">视频</a>
+        <a class="nav-link" href="#/paths" data-route="paths">路径</a>
+        <a class="nav-link" href="#/history" data-route="history">历史</a>
+        <a class="nav-link" href="#/settings" data-route="settings">设置</a>
+      </nav>
+      <div id="page-breadcrumb"></div>
+      <section id="app"></section>
+      <ol id="test-results" class="card" style="padding:24px"></ol>
+      <p id="test-summary" role="status"></p>
+    </main>
+    <script src="../src/store.js"></script>
+    <script src="../src/catalog.js"></script>
+    <script src="../src/backup.js"></script>
+    <script src="../src/sources.js"></script>
+    <script src="../src/app.js"></script>
+    <script src="test-runner.js"></script>
+  </body>
+</html>

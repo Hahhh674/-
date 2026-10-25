@@ -1,0 +1,33 @@
+<!doctype html><html><body>
+<script src="file:///C:/Users/Administrator/Desktop/Ã˝∏Ëapp/src/store.js"></script>
+<script src="file:///C:/Users/Administrator/Desktop/Ã˝∏Ëapp/src/catalog.js"></script>
+<script src="file:///C:/Users/Administrator/Desktop/Ã˝∏Ëapp/src/backup.js"></script>
+<script src="file:///C:/Users/Administrator/Desktop/Ã˝∏Ëapp/src/sources.js"></script>
+<script>
+  const log = (msg) => document.body.insertAdjacentHTML('beforeend', '<div>' + msg + '</div>');
+  (async function () {
+    log('start');
+    try {
+      const store = window.MusicStore.create({ name: 'probe-' + Date.now() });
+      log('store-created');
+      await store.put('favorites', { id: 'song:test-1', type: 'song', contentId: 'test-1' });
+      log('favorite-put');
+      await store.put('paths', { id: 'path:test-1', name: '“Ù¿÷', path: 'D:\\Music' });
+      log('path-put');
+      const saved = await store.get('favorites', 'song:test-1');
+      log('saved=' + (saved && saved.contentId));
+      const snapshot = await store.exportAll();
+      log('export=' + snapshot.paths.length + ':' + snapshot.favorites.length);
+      await store.replaceAll({ paths: [{ id: 'path:restored', name: 'ª÷∏¥', path: 'E:\\Audio' }] });
+      log('replace-ok');
+      const paths = await store.getAll('paths');
+      const favorites = await store.getAll('favorites');
+      log('after=' + paths.length + ':' + favorites.length);
+      await store.clear();
+      log('clear-ok');
+      store.close();
+    } catch (e) { log('ERR:' + e.message); }
+    log('done');
+  })();
+</script>
+</body></html>
