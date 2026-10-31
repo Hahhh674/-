@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d2b">
+  <title>生日快乐 · 专属纪念</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-page="home"><span class="brand-mark">✦</span><span>Birthday Bloom</span></button>
+      <div class="today-label" id="todayLabel"></div>
+      <button class="icon-button" id="themeToggle" aria-label="切换特效">☼</button>
+    </header>
+
+    <section class="page active" id="page-home">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <span class="eyebrow">A little celebration for</span>
+          <h1 id="heroTitle">生日快乐</h1>
+          <p id="heroGreeting">愿今天的每一份快乐，都恰好被你遇见。</p>
+          <div class="hero-actions">
+            <button class="primary-button" data-page="media">打开纪念相册 <span>→</span></button>
+            <button class="quiet-button" data-page="settings">编辑祝福</button>
+          </div>
+        </div>
+        <div class="hero-orbit"><div class="orbit-ring"></div><div class="cake">🎂</div><span class="spark spark-a">✦</span><span class="spark spark-b">✧</span></div>
+      </div>
+
+      <div class="section-heading"><div><span class="eyebrow">Today in your story</span><h2>今天的纪念</h2></div><span class="status-pill" id="birthdayStatus">准备好庆祝</span></div>
+      <div class="stat-grid">
+        <article class="stat-card lavender"><span class="stat-icon">♡</span><span class="stat-label">我们认识了</span><strong id="daysKnown">0 天</strong><small id="dateSince">设置认识开始日期</small></article>
+        <article class="stat-card peach"><span class="stat-icon">○</span><span class="stat-label">距离生日</span><strong id="daysToBirthday">—</strong><small id="birthdayDate">设置生日日期</small></article>
+        <article class="stat-card mint"><span class="stat-icon">▧</span><span class="stat-label">珍藏媒体</span><strong id="mediaCount">0 件</strong><small>照片与视频</small></article>
+      </div>
+
+      <div class="section-heading compact"><div><span class="eyebrow">Quick access</span><h2>快速访问</h2></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" data-page="timeline"><span class="quick-icon">◷</span><span><b>认识天数</b><small>看看时间走了多远</small></span><i>→</i></button>
+        <button class="quick-card" data-page="media"><span class="quick-icon">▣</span><span><b>照片与视频</b><small>打开你们的故事</small></span><i>→</i></button>
+        <button class="quick-card" data-page="backup"><span class="quick-icon">↥</span><span><b>备份与保存</b><small>守护每一份记忆</small></span><i>→</i></button>
+        <button class="quick-card" data-page="settings"><span class="quick-icon">⚙</span><span><b>数据与设置</b><small>调整专属体验</small></span><i>→</i></button>
+      </div>
+    </section>
+
+    <section class="page" id="page-timeline">
+      <div class="page-intro"><span class="eyebrow">Your shared timeline</span><h1>认识天数</h1><p>每一天，都是你们故事里值得记住的一页。</p></div>
+      <div class="timeline-hero"><span class="stat-label">从那天开始，我们已经</span><strong id="timelineDays">0</strong><span>天</span><div class="timeline-line"><span></span></div><small id="timelineDate">还没有设置开始日期</small></div>
+      <div class="info-card"><span class="quick-icon">✦</span><div><h3>时间会留下答案</h3><p id="timelineDetail">在设置中填写你们认识的日期，这里会自动记录相伴的时间。</p></div></div>
+    </section>
+
+    <section class="page" id="page-media">
+      <div class="page-intro"><span class="eyebrow">Your little gallery</span><h1>照片与视频</h1><p>把想说的话，藏进每一张照片和每一段影像里。</p></div>
+      <label class="upload-zone"><input id="mediaInput" type="file" accept="image/*,video/*" multiple><span class="upload-icon">＋</span><b>添加照片或视频</b><small>支持批量选择，内容只保存在本机</small></label>
+      <div class="filter-row"><button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="image">照片</button><button class="filter" data-filter="video">视频</button><span id="mediaHint"></span></div>
+      <div class="media-grid" id="mediaGrid"><div class="empty-state"><span>♡</span><p>还没有纪念内容</p><small>从一张照片开始，慢慢填满这里。</small></div></div>
+    </section>
+
+    <section class="page" id="page-backup">
+      <div class="page-intro"><span class="eyebrow">Keep your memories safe</span><h1>备份与保存</h1><p>所有资料都留在你的设备上，也可以用备份文件带到另一台设备。</p></div>
+      <div class="backup-card"><div class="backup-icon">✓</div><div><span class="stat-label">本地存储状态</span><h2>已安全保存在本机</h2><p id="storageSummary">设置和媒体会在浏览器中持续保存。</p></div></div>
+      <div class="action-list"><button class="setting-row" id="exportButton"><span class="row-icon">↥</span><span><b>导出完整备份</b><small>包含设置与照片、视频</small></span><i>→</i></button><label class="setting-row"><span class="row-icon">↧</span><span><b>导入备份文件</b><small>恢复另一台设备上的资料</small></span><i>→</i><input id="importInput" type="file" accept=".json,application/json" hidden></label></div>
+      <div class="notice"><b>关于保存路径</b><p>浏览器会将内容保存在当前网站数据中。导出备份时，你可以选择电脑或手机提供的保存位置。</p></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="page-intro"><span class="eyebrow">Make it yours</span><h1>数据与设置</h1><p>把这份祝福，调整成只属于你们的样子。</p></div>
+      <form class="settings-form" id="settingsForm">
+        <label><span>对方的称呼或名字</span><input id="nameInput" type="text" placeholder="例如：小月"></label>
+        <label><span>生日日期</span><input id="birthdayInput" type="date"></label>
+        <label><span>你们开始认识的日期</span><input id="sinceInput" type="date"></label>
+        <label><span>首页祝福文字</span><textarea id="greetingInput" rows="3" placeholder="写一句只想对 TA 说的话"></textarea></label>
+        <div class="form-divider"></div>
+        <div class="toggle-row"><span><b>生日特效</b><small>首页显示彩带、闪光和漂浮元素</small></span><input id="effectsInput" class="toggle" type="checkbox" checked></div>
+        <button class="primary-button full" type="submit">保存设置</button>
+      </form>
+      <button class="danger-button" id="clearButton">清除本机所有数据</button>
+    </section>
+  </main>
+  <nav class="bottom-nav"><button class="nav-item active" data-page="home"><span>⌂</span>首页</button><button class="nav-item" data-page="timeline"><span>◷</span>认识天数</button><button class="nav-item" data-page="media"><span>▣</span>媒体</button><button class="nav-item" data-page="backup"><span>↥</span>备份</button><button class="nav-item" data-page="settings"><span>⚙</span>设置</button></nav>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
